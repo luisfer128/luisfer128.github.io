@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Toolbar from './componentes/Toolbar';
+import SearchBar from './componentes/Searchbar';
+import sapoLandingImage from './images/sapo-landing.webp'; 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Toolbar />
+      <div className="content">
+        <header className="App-header">
+        <SearchBar/>  
+        </header>
+        <div>
+          <img src={sapoLandingImage} alt="Sapo Landing" className='imagen-landing' />
+        </div>
+      </div>
     </div>
   );
 }
