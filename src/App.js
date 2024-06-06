@@ -2,6 +2,8 @@ import './App.css';
 import Toolbar from './componentes/Toolbar';
 import SearchBar from './componentes/Searchbar';
 import sapoLandingImage from './images/sapo-landing.webp'; 
+import LandingPage from './componentes/LandingPage';
+import Footer from './componentes/Footer';
 
 function App() {
   return (
@@ -9,10 +11,12 @@ function App() {
       <Toolbar />
       <div className="content">
         <header className="App-header">
-        <SearchBar/>  
+        <LandingPage />
+        <SearchBar />    
+          <img src={sapoLandingImage} alt="Sapo Landing" className='imagen-landing' />
         </header>
         <div>
-          <img src={sapoLandingImage} alt="Sapo Landing" className='imagen-landing' />
+        <Footer />
         </div>
       </div>
     </div>
