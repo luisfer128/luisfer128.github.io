@@ -67,7 +67,7 @@ function Toolbar({ loggedInUser, onLogout }) {
                                 anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                                 transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                             >
-                                <MenuItem onClick={() => handleMenuItemClick('/facturas')}>Facturas</MenuItem>
+                                <MenuItem onClick={() => handleMenuItemClick('/facturas')}>Control de Facturas</MenuItem>
                             </Menu>
                         </>
                     )}
