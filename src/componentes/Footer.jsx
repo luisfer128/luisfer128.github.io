@@ -16,7 +16,7 @@ function Footer() {
         <Container>
             <Grid container spacing={4}>
                 <Grid item xs={12} md={4}>
-                    <Typography variant="h6" gutterBottom>Sapito Store</Typography>
+                    <Typography variant="h6" gutterBottom>ServiSapito</Typography>
                     <Link href="#" sx={{ display: 'block', color: 'inherit', mb: 1, '&:hover': { textDecoration: 'underline' } }}>
                         Sobre nosotros
                     </Link>

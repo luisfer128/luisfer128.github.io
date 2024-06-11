@@ -27,12 +27,13 @@ function App() {
                         <Routes>
                             <Route path="/" element={<LandingPage />} />
                             <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-                            <Route path="/crear-factura" element={<Factura />} />
-                            <Route path="/eliminar-factura" element={<Factura />} />
-                            <Route path="/actualizar-factura" element={<Factura />} />
+                            <Route path="/facturas" element={<Factura />} />
                         </Routes>
                     </header>
-                    <Footer />
+                    <div>
+                        <Footer />
+                    </div>
+                    
                 </div>
             </div>
         </Router>
