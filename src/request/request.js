@@ -1,42 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Alert } from '@mui/material';
 
 function ConsumeApi({ facturaNumero }) {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
+            setError(null);
             try {
-                const response = await fetch(`http://100.102.45.46:3200/reparaciones/${facturaNumero}`);
+                const response = await fetch(`http://100.113.27.1:3200/reparaciones/${facturaNumero}`);
                 if (!response.ok) {
                     throw new Error(`No se ha encontrado registro de esta factura`);
                 }
                 const jsonData = await response.json();
-                console.log('Data fetched:', jsonData);
-
-                // Comprobar si jsonData.data es un objeto y convertirlo a un array si es necesario
                 if (jsonData.data && typeof jsonData.data === 'object' && !Array.isArray(jsonData.data)) {
                     setData([jsonData.data]); // Convertir a array
                 } else {
                     setData(jsonData.data); // Dejar como está si ya es un array
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
                 setError(error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchData();
+    }, [facturaNumero]);
 
-        console.log('useEffect ejecutado');
-    }, [facturaNumero]); // Dependencia para volver a llamar al efecto cuando facturaNumero cambia
+    if (loading) {
+        return <CircularProgress />;
+    }
 
     if (error) {
         return (
-            <Box className='app' color={'black'}>
-                <Typography variant="h6" color="error">Error al cargar los datos: {error.message}</Typography>
-            </Box>
+            <Alert severity="error">
+                Error al cargar los datos: {error.message}
+            </Alert>
         );
     }
 
@@ -53,7 +56,7 @@ function ConsumeApi({ facturaNumero }) {
                             <TableCell>Cliente</TableCell>
                             <TableCell>Fecha Ingreso</TableCell>
                             <TableCell>Fecha Salida</TableCell>
-                            <TableCell>Teléfono Cliente</TableCell>
+                            <TableCell>Teléfono Contacto</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -64,7 +67,7 @@ function ConsumeApi({ facturaNumero }) {
                                 <TableCell>{reparacion.Estado}</TableCell>
                                 <TableCell>{reparacion.Cliente}</TableCell>
                                 <TableCell>{new Date(reparacion.FechaIngreso).toISOString().split('T')[0]}</TableCell>
-                                <TableCell>{new Date(reparacion.FechaSalida).toISOString().split('T')[0]}</TableCell>
+                                <TableCell>{reparacion.FechaSalida ? new Date(reparacion.FechaSalida).toISOString().split('T')[0] : ''}</TableCell>
                                 <TableCell>{reparacion.TelefonoCliente}</TableCell>
                             </TableRow>
                         ))}
